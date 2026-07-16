@@ -46,6 +46,11 @@
     }
     .kb-pill:hover { background: var(--kb-line); }
     .kb-pill.active { background: var(--kb-red); border-color: var(--kb-red); color: #fff; }
+    .kb-btn-add {
+        background: var(--kb-ink); color: #fff; border-radius: 999px; padding: .35rem 1.1rem;
+        font-size: .75rem; font-weight: 700; text-decoration: none; white-space: nowrap;
+    }
+    .kb-btn-add:hover { background: var(--kb-red); color: #fff; }
 
     .kb-hero { background: var(--kb-ink); padding: 2.5rem 0 3rem; }
     .kb-hero-main {
@@ -114,15 +119,24 @@
                 <div class="kb-logo kb-display">Kabar<span class="dot">.</span>Burung</div>
                 <div class="kb-tagline kb-mono">belum tentu akurat, tapi dijamin seru</div>
             </div>
-            <div class="d-flex flex-wrap gap-2" id="kb-filters">
-                <button type="button" class="kb-pill kb-mono active" data-filter="Semua">Semua</button>
-                @foreach ($categories as $cat)
-                    <button type="button" class="kb-pill kb-mono" data-filter="{{ $cat }}">{{ $cat }}</button>
-                @endforeach
+            <div class="d-flex flex-wrap align-items-center gap-2">
+                <div class="d-flex flex-wrap gap-2" id="kb-filters">
+                    <button type="button" class="kb-pill kb-mono active" data-filter="Semua">Semua</button>
+                    @foreach ($categories as $cat)
+                        <button type="button" class="kb-pill kb-mono" data-filter="{{ $cat }}">{{ $cat }}</button>
+                    @endforeach
+                </div>
+                <a href="{{ route('posts.create') }}" class="kb-btn-add kb-mono">+ Tambah Berita</a>
             </div>
         </div>
     </div>
 </div>
+
+@if (session('success'))
+    <div class="container mt-3">
+        <div class="alert alert-success">{{ session('success') }}</div>
+    </div>
+@endif
 
 @if ($headline)
 <div class="kb-hero kb-bleed">
@@ -221,4 +235,4 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
-@stop   
+@stop
